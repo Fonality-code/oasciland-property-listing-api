@@ -32,7 +32,7 @@ class CreateFavorite(BaseModel):
         json_schema_extra={
             "example": {
                 "userID": "12342523",
-                "propertyId": "5eb7cf5a86d9755df3a6c593"`
+                "propertyId": "5eb7cf5a86d9755df3a6c593"
             }
         }
     )
