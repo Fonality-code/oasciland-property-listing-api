@@ -7,6 +7,7 @@ from fastapi import FastAPI
 from database.mongod import init_db
 
 
+from routes.v1 import property
 
 
 
@@ -21,6 +22,8 @@ app = FastAPI(
 
 
 # add routers
+
+app.include_router(property.router)
 
 
 

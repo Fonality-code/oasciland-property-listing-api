@@ -8,6 +8,6 @@ class Settings(BaseSettings):
 
     APP_NAME: str
     APP_VERSION: str
-    APP_DESCRIPTION: str = ""
+    APP_DESCRIPTION: str = "Oasciland property listing API"
     MONGODB_URL: str
     DATABASE_NAME: str
