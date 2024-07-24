@@ -3,6 +3,7 @@ from fastapi import APIRouter, HTTPException
 from datetime import datetime
 
 from models.property import Property, CreateProperty, UpdateProperty
+from models.favorite import Favorite
 from beanie import PydanticObjectId
 
 router = APIRouter(
@@ -57,7 +58,6 @@ async def update_property(id: PydanticObjectId, property_update: UpdateProperty)
     return property
 
 
-
 @router.delete("/{id}")
 async def delete_property(id: PydanticObjectId):
     property = await Property.get(id)
@@ -65,4 +65,15 @@ async def delete_property(id: PydanticObjectId):
         raise HTTPException(status_code=404, detail="Property not found")
 
     await property.delete()
+
+    # Delete all favorites associated with the property
+    favorites = await Favorite.find({"propertyId": str(id)})
+    for favorite in favorites:
+        await favorite.delete
+        
     return {"message": "Property deleted successfully"}
+
+
+@router.get("/search")
+async def search_properties(query: str):
+    return {"message": "Search properties "}

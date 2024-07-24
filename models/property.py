@@ -1,8 +1,8 @@
-from beanie import Document
+from beanie import Document, Indexed
 from pydantic import BaseModel, ConfigDict
 
 from datetime import datetime
-from typing import Optional, List
+from typing import Optional, List, Annotated
 
 """
 id: string (UUID)
@@ -33,7 +33,7 @@ class Property(Document):
     images: List[str]
     virtualTourUrl: str
     amenities: List[str] = []
-    ownerId: str
+    ownerId: Annotated[str, Indexed()]
     createdAt: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     updatedAt: str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -68,11 +68,10 @@ class CreateProperty(BaseModel):
                 ],
                 "virtualTourUrl": "https://example.com/virtual-tour",
                 "amenities": ["pool", "gym"],
-                "ownerId": "123456789" 
+                "ownerId": "123456789",
             }
         },
     )
-
 
 
 class UpdateProperty(BaseModel):
@@ -108,3 +107,6 @@ class UpdateProperty(BaseModel):
             }
         },
     )
+
+
+
